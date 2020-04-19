@@ -22,6 +22,7 @@ To start the app:
 ```bash
 docker-compose build
 docker-compose up -d
+open http://localhost:3000
 ```
 
 To stop the app:
