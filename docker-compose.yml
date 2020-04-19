@@ -32,7 +32,16 @@ services:
       - INFLUXDB_URL=http://influxdb:8086
       - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
-
+  speedtest:
+    build:
+      context: .
+      dockerfile: Speedtest-Dockerfile
+    container_name: speedtest
+    volumes:
+      - ./config.ini:/src/config.ini
+    depends_on:
+      - influxdb
+    restart: always
   grafana:
     image: grafana/grafana:latest
     ports:
