@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:54",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -16,6 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -26,7 +26,7 @@
       "color": {
         "cardColor": "#b4ff00",
         "colorScale": "sqrt",
-        "colorScheme": "interpolateSpectral",
+        "colorScheme": "interpolateReds",
         "exponent": 0.5,
         "max": null,
         "min": null,
@@ -34,6 +34,7 @@
       },
       "dataFormat": "tsbuckets",
       "datasource": null,
+      "description": "",
       "gridPos": {
         "h": 8,
         "w": 24,
@@ -48,9 +49,11 @@
       "legend": {
         "show": false
       },
+      "repeat": null,
       "reverseYBuckets": false,
       "targets": [
         {
+          "alias": "upload_speed",
           "groupBy": [
             {
               "params": [
@@ -68,7 +71,7 @@
           "measurement": "speedtest_results",
           "orderByTime": "ASC",
           "policy": "speedtests.autogen",
-          "query": "SELECT mean(\"upload\") AS \"mean_upload\" FROM \"speedtests\".\"autogen\".\"speed_test_results\" WHERE $timeFilter GROUP BY time(1h) fill(null)",
+          "query": "SELECT mean(\"upload\") / 1000000 AS \"mean_upload\" FROM \"speedtests\".\"autogen\".\"speed_test_results\" WHERE $timeFilter GROUP BY time(30m) fill(previous)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -103,8 +106,8 @@
       "xBucketNumber": null,
       "xBucketSize": null,
       "yAxis": {
-        "decimals": null,
-        "format": "bps",
+        "decimals": 2,
+        "format": "Mbits",
         "logBase": 1,
         "max": null,
         "min": null,
@@ -148,6 +151,7 @@
       "reverseYBuckets": false,
       "targets": [
         {
+          "alias": "",
           "groupBy": [
             {
               "params": [
@@ -212,7 +216,7 @@
         "show": true,
         "splitFactor": null
       },
-      "yBucketBound": "auto",
+      "yBucketBound": "middle",
       "yBucketNumber": null,
       "yBucketSize": null
     },
@@ -301,7 +305,7 @@
           "fill": true,
           "line": true,
           "op": "lt",
-          "value": 30000000,
+          "value": 60000000,
           "yaxis": "left"
         }
       ],
@@ -577,7 +581,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU Usage",
+      "title": "RPI CPU Usage",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -615,7 +619,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -623,7 +627,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -641,10 +645,10 @@
     ]
   },
   "timezone": "",
-  "title": "Network Monitor",
+  "title": "Raspberry Pi Network Monitor",
   "uid": "V1eSgcmgk",
   "variables": {
     "list": []
   },
-  "version": 1
+  "version": 9
 }
