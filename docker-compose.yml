@@ -16,7 +16,7 @@ services:
         max-size: "10k"
         max-file: "5"
   chronograf:
-    image: chronograf:1.8.7
+    image: chronograf:1.8.8
     ports:
       - '8888:8888'
     volumes:
